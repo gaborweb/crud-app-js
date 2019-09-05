@@ -1,2 +1,2 @@
 # crud-app-js
-Web development basics...
+A native and basic JavaScript CRUD app.
