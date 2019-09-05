@@ -1,0 +1,113 @@
+<html>
+<head></head>
+<body>
+
+<p><label>First Name: </label><input type="text" id="fName"></p>
+<p><label>Last Name: </label><input type="text" id="lName"></p>
+<p><label>Age: </label><input type="number" id="age"></p>
+<p><label>Gender: </label>
+	<select id="gender">
+		<option value="true">Man</option>
+		<option value="false">Woman</option>
+	</select>
+</p>
+<button type="button" onclick="pushElement()">Push</button>
+<button type="button" onclick="popElement()">Pop</button>
+<button type="button" onclick="addElement()">Add Person</button>
+<button type="button" onclick="modifyElement()">Modify Person</button>
+<br>
+<p id="p1"></p>
+
+<script>
+
+var objPerson=[
+				{firstName:'Leo', lastName:'Nardo', age:40, gender:true},
+				{firstName:'Michel', lastName:'Angelo', age:30, gender:true},
+				{firstName:'Dona', lastName:'Tello', age:20, gender:false},
+				{firstName:'Rafa', lastName:'Ello', age:15, gender:true}
+			  ];
+			  
+writeOut();
+
+var index=0;
+
+function writeOut(){
+
+	var elements="";
+
+	for(var i=0; i<objPerson.length; i++){
+
+		elements+=objPerson[i].firstName+" "+objPerson[i].lastName+" "+objPerson[i].age+" "+objPerson[i].gender+
+		" "+"<button type='button' onclick='deleteItem("+i+")'>Delete</button>"+
+		" "+"<button type='button' onclick='editItem("+i+")'>Edit</button>"+"<br>";
+	}
+	
+	document.getElementById("p1").innerHTML=elements;
+}
+
+function popElement(){
+	objPerson.pop();
+	
+	this.writeOut();
+}
+
+function pushElement(){
+	objPerson.push(
+		{
+			firstName:"newFirstName",
+			lastNameName:"newLastName",
+			age:0,
+			gender:null
+		}
+	)
+	this.writeOut();
+}
+
+function addElement(){
+
+	var firstNameInput=document.getElementById("fName").value;
+	var lastNameInput=document.getElementById("lName").value;
+	var ageInput=Number(document.getElementById("age").value);
+	var genderSelected=document.getElementById("gender").value;
+	
+	objPerson.push(
+		{
+			firstName:firstNameInput,
+			lastNameName:lastNameInput,
+			age:ageInput,
+			gender:genderSelected
+		}
+	)
+	this.writeOut();
+}
+
+function deleteItem(item){
+	
+	objPerson.splice(item,1);
+	this.writeOut();
+}
+
+function editItem(item){
+
+	index=item;
+	
+	document.getElementById("fName").value=objPerson[item].firstName;
+	document.getElementById("lName").value=objPerson[item].lastName;
+	document.getElementById("age").value=objPerson[item].age;
+	document.getElementById("gender").value=objPerson[item].gender;
+}
+
+function modifyElement(){
+
+	objPerson[index].firstName=document.getElementById("fName").value;
+	objPerson[index].lastName=document.getElementById("lName").value;
+	objPerson[index].age=document.getElementById("age").value;
+	objPerson[index].gender=document.getElementById("gender").value;
+	
+	this.writeOut();
+}
+		  
+</script>
+
+</body>
+</html>
